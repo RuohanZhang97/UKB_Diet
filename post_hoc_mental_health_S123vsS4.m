@@ -24,6 +24,7 @@ for group_ind = 1:3
         [~,p,~,stats] = ttest2(tmp_regressed_data(tmp_group_id == group_ind),tmp_regressed_data(tmp_group_id == 4));
         pVal(i,1) = p;
         tVal(i,1) = stats.tstat;
+        dVal(i,1) = computeCohen_d(tmp_regressed_data(tmp_group_id == group_ind),tmp_regressed_data(tmp_group_id == 4));
         ttest_mental_food_group_results(group_ind).(strcat(FieldNames{i,1},'_tVal')) = stats.tstat;
         ttest_mental_food_group_results(group_ind).(strcat(FieldNames{i,1},'_pVal')) = p;
         ttest_mental_food_group_results(group_ind).(strcat(FieldNames{i,1},'_Group_NumSub')) = sum(tmp_group_id == group_ind);
@@ -32,6 +33,7 @@ for group_ind = 1:3
         G4_NumSub(i,1) = sum(tmp_group_id == 4);
     end
     tbl.tVal = tVal;
+    tbl.dVal = dVal;
     tbl.pVal = pVal;
     tbl.Group_NumSub = Group_NumSub;
     tbl.G4_NumSub = G4_NumSub;
